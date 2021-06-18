@@ -24,8 +24,22 @@ dependencies {
     compileOnly 'org.spigotmc:spigot-api:1.16.5-R0.1-SNAPSHOT'
 }
 
+jar{
+    from{
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it)}
+    }
+    manifest {
+        attributes(
+                'Implementation-Title': 'Elephantom',
+                "Main-Class":"dustin.nl.elephantom.Elephantom"
+        )
+    }
+    destinationDir = file("D:/Projects/Overige/Minecraft server 1.16.5 (custom plugins)/plugins")
+    archivesBaseName = "Elephantom"
+}
 processResources {
     from(sourceSets.main.resources.srcDirs) {
-        filter ReplaceTokens, tokens: [version: version]
+        include ('plugin.yml')
+        expand('version': project.version)
     }
 }

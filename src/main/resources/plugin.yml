@@ -1,7 +1,10 @@
 name: Elephantom
-version: @version@
+version: ${version}
 main: dustswiffer.nl.elephantom.Elephantom
 api-version: 1.16
 authors: [DustSwiffer]
 description: manipulates the spawn of phanttoms
 website: DustSwiffer.nl
+commands:
+  gac:
+    description: gives list of active chunks
