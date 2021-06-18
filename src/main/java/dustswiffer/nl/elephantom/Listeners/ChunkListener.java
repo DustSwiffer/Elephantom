@@ -46,8 +46,8 @@ public class ChunkListener implements Listener {
             if(place != null) {
                 if (plugin.getXes().get(place).equals(currentChunk.getX()) &&
                         plugin.getZes().get(place).equals(currentChunk.getZ())) {
-                    plugin.getXes().remove(currentChunk.getX());
-                    plugin.getZes().remove(currentChunk.getZ());
+                    plugin.getXes().remove(place);
+                    plugin.getZes().remove(place);
                 }
             }
         }
