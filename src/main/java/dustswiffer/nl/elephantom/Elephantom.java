@@ -1,6 +1,6 @@
 package dustswiffer.nl.elephantom;
 
-import dustswiffer.nl.elephantom.Commands.GACCommand;
+import dustswiffer.nl.elephantom.Commands.DebugCommand;
 import dustswiffer.nl.elephantom.Servicces.PhantomService;
 import dustswiffer.nl.elephantom.Servicces.TimeService;
 import dustswiffer.nl.elephantom.Listeners.PhantomListener;
@@ -28,7 +28,7 @@ public final class Elephantom extends JavaPlugin {
         TimeService timeService = new TimeService(this);
         PhantomService phantomService = new PhantomService(this);
 
-        getCommand("e-debug").setExecutor(new GACCommand(this));
+        getCommand("e-debug").setExecutor(new DebugCommand(this));
 
         getOverWorldName();
 

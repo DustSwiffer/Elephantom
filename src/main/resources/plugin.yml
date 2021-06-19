@@ -8,6 +8,5 @@ website: DustSwiffer.nl
 commands:
   e-debug:
     description: gives list of active chunks
-    aliases:
-      - 'elephantd'
-      - 'edebug'
+    aliases: [elephantd, edebug]
+    permission: elephantom.debug
