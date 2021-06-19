@@ -6,5 +6,8 @@ authors: [DustSwiffer]
 description: manipulates the spawn of phanttoms
 website: DustSwiffer.nl
 commands:
-  gac:
+  e-debug:
     description: gives list of active chunks
+    aliases:
+      - 'elephantd'
+      - 'edebug'

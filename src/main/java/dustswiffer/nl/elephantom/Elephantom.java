@@ -1,24 +1,18 @@
 package dustswiffer.nl.elephantom;
 
 import dustswiffer.nl.elephantom.Commands.GACCommand;
+import dustswiffer.nl.elephantom.Servicces.PhantomService;
 import dustswiffer.nl.elephantom.Servicces.TimeService;
-import dustswiffer.nl.elephantom.Listeners.ChunkListener;
 import dustswiffer.nl.elephantom.Listeners.PhantomListener;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
 
 public final class Elephantom extends JavaPlugin {
-
-    public List<Integer> xes = new ArrayList<Integer>();
-    public List<Integer> zes = new ArrayList<Integer>();
 
     public String OverWorldName;
     public int MinTime, MaxTime;
@@ -29,12 +23,12 @@ public final class Elephantom extends JavaPlugin {
         PluginManager pluginManager = this.getServer().getPluginManager();
 
         PhantomListener phantomListener = new PhantomListener(this);
-        ChunkListener chunkListener = new ChunkListener(this);
 
         pluginManager.registerEvents(phantomListener, this);
-        pluginManager.registerEvents(chunkListener, this);
         TimeService timeService = new TimeService(this);
-        getCommand("gac").setExecutor(new GACCommand(this));
+        PhantomService phantomService = new PhantomService(this);
+
+        getCommand("e-debug").setExecutor(new GACCommand(this));
 
         getOverWorldName();
 
@@ -42,8 +36,7 @@ public final class Elephantom extends JavaPlugin {
         MaxTime = ThreadLocalRandom.current().nextInt(MinTime, 21000);
         PhantomSpawned = false;
 
-        getLogger().info(MinTime + " & " + MaxTime);
-        this.getServer().getScheduler().scheduleAsyncRepeatingTask(this, () -> {
+        this.getServer().getScheduler().scheduleSyncRepeatingTask(this, () -> {
             if(timeService.IsDay(0, MinTime)) {
                 PhantomSpawned = false;
             }
@@ -54,7 +47,7 @@ public final class Elephantom extends JavaPlugin {
                     MinTime = ThreadLocalRandom.current().nextInt(13188, 21000);
                     MinTime = ThreadLocalRandom.current().nextInt(MinTime, 21000);
 
-
+                    phantomService.spawn();
                     PhantomSpawned = true;
                 }
             }
@@ -76,21 +69,5 @@ public final class Elephantom extends JavaPlugin {
         }
 
         this.OverWorldName = properties.getProperty("level-name");
-    }
-
-    public List<Integer> getXes() {
-        return xes;
-    }
-
-    public void setXes(List<Integer> xes) {
-        this.xes = xes;
-    }
-
-    public List<Integer> getZes() {
-        return zes;
-    }
-
-    public void setZes(List<Integer> zes) {
-        this.zes = zes;
     }
 }

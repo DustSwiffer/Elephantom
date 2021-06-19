@@ -4,7 +4,6 @@ import dustswiffer.nl.elephantom.Elephantom;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Player;
 
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -18,19 +17,21 @@ public class PhantomService {
         this.locationService = new LocationService(plugin);
     }
 
-    public void spawn(){
+    public void spawn() {
         int count = plugin.getServer().getOnlinePlayers().size();
+        if(count > 0 ){
+            int multiplier = ThreadLocalRandom.current().nextInt(1, 3);
+            int spawnAmount = count * multiplier;
 
-        int multiplier = ThreadLocalRandom.current().nextInt(1, 3);
-        int spawnAmount = count * multiplier;
+            World world = plugin.getServer().getWorld(plugin.OverWorldName);
 
-        World world = plugin.getServer().getWorld(plugin.OverWorldName);
-
-        if(world != null) {
-            for(int i = 0; i < spawnAmount; i++) {
-                 Location spawnLocation = locationService.getRandomLocation();
-                 world.spawnEntity(spawnLocation, EntityType.PHANTOM);
+            if (world != null) {
+                for (int i = 0; i < spawnAmount + 1; i++) {
+                    Location spawnLocation = locationService.getRandomLocation();
+                    world.spawnEntity(spawnLocation, EntityType.PHANTOM);
+                }
             }
         }
+
     }
 }

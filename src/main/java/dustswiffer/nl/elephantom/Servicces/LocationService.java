@@ -1,10 +1,12 @@
 package dustswiffer.nl.elephantom.Servicces;
 
 import dustswiffer.nl.elephantom.Elephantom;
+import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 
+import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class LocationService {
@@ -17,23 +19,28 @@ public class LocationService {
     }
 
     public Location getRandomLocation() {
-
-        int max = plugin.xes.size();
-
-        int randomNumber = ThreadLocalRandom.current().nextInt(1, max);
-
-        int x = plugin.xes.get(randomNumber);
-        int z = plugin.zes.get(randomNumber);
-        int y = ThreadLocalRandom.current().nextInt(1, 13);
-
         World world = plugin.getServer().getWorld(plugin.OverWorldName);
-        if(world != null){
-            Location preLocation = new Location(world, x, y, z);
-            Block highestBlock =  world.getHighestBlockAt(preLocation);
+        if(world != null) {
+            Chunk[] chunks = world.getLoadedChunks();
 
-            int randomY = ThreadLocalRandom.current().nextInt(highestBlock.getY() + 10,highestBlock.getY() + 1 );
+            if(chunks.length > 0) {
 
-            return new Location(world, x, randomY, z);
+                Random random = new Random();
+                int number = random.nextInt(chunks.length);
+
+                Chunk chunk = chunks[number];
+
+                int x = chunk.getX();
+                int z = chunk.getZ();
+
+                Location preLocation = new Location(world, x, 1, z);
+                Block highestBlock =  world.getHighestBlockAt(preLocation);
+
+                int randomY = ThreadLocalRandom.current().nextInt(highestBlock.getY() + 15,highestBlock.getY() + 36 );
+
+                return new Location(world, x, randomY, z);
+            }
+
         }
 
         return null;
