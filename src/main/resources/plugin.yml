@@ -2,11 +2,11 @@ name: Elephantom
 version: ${version}
 main: dustswiffer.nl.elephantom.Elephantom
 api-version: 1.16
-authors: [DustSwiffer]
+authors: [ DustSwiffer ]
 description: manipulates the spawn of phanttoms
 website: DustSwiffer.nl
 commands:
   e-debug:
     description: gives list of active chunks
-    aliases: [elephantd, edebug]
+    aliases: [ elephantd, edebug ]
     permission: elephantom.debug

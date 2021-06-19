@@ -20,10 +20,10 @@ public class LocationService {
 
     public Location getRandomLocation() {
         World world = plugin.getServer().getWorld(plugin.OverWorldName);
-        if(world != null) {
+        if (world != null) {
             Chunk[] chunks = world.getLoadedChunks();
 
-            if(chunks.length > 0) {
+            if (chunks.length > 0) {
 
                 Random random = new Random();
                 int number = random.nextInt(chunks.length);
@@ -34,9 +34,9 @@ public class LocationService {
                 int z = chunk.getZ();
 
                 Location preLocation = new Location(world, x, 1, z);
-                Block highestBlock =  world.getHighestBlockAt(preLocation);
+                Block highestBlock = world.getHighestBlockAt(preLocation);
 
-                int randomY = ThreadLocalRandom.current().nextInt(highestBlock.getY() + 15,highestBlock.getY() + 36 );
+                int randomY = ThreadLocalRandom.current().nextInt(highestBlock.getY() + 15, highestBlock.getY() + 36);
 
                 return new Location(world, x, randomY, z);
             }

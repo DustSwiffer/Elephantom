@@ -22,12 +22,13 @@ public final class Elephantom extends JavaPlugin {
     public void onEnable() {
         PluginManager pluginManager = this.getServer().getPluginManager();
 
-        PhantomListener phantomListener = new PhantomListener(this);
+        PhantomListener phantomListener = new PhantomListener();
 
         pluginManager.registerEvents(phantomListener, this);
         TimeService timeService = new TimeService(this);
         PhantomService phantomService = new PhantomService(this);
 
+        //noinspection ConstantConditions
         getCommand("e-debug").setExecutor(new DebugCommand(this));
 
         getOverWorldName();
@@ -51,7 +52,7 @@ public final class Elephantom extends JavaPlugin {
                     PhantomSpawned = true;
                 }
             }
-        }, 20l, 10l);
+        }, 20L, 10L);
     }
 
     @Override

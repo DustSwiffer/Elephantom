@@ -19,7 +19,7 @@ public class PhantomService {
 
     public void spawn() {
         int count = plugin.getServer().getOnlinePlayers().size();
-        if(count > 0 ){
+        if (count > 0) {
             int multiplier = ThreadLocalRandom.current().nextInt(1, 3);
             int spawnAmount = count * multiplier;
 

@@ -23,22 +23,24 @@ public class DebugCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command command, String labels, String[] args) {
         if (sender.hasPermission("elephantom.debug")) {
             World world = plugin.getServer().getWorld(plugin.OverWorldName);
+            
             if (world != null) {
                 Chunk[] chunks = world.getLoadedChunks();
                 if (chunks.length > 0) {
-                    sender.sendMessage(ChatColor.GREEN.toString() + "Amount of loaded chunks: " + ChatColor.WHITE.toString() + chunks.length);
+                    sender.sendMessage(ChatColor.GREEN + "Amount of loaded chunks: " + ChatColor.WHITE + chunks.length);
                 } else {
-                    sender.sendMessage(ChatColor.RED.toString() + "THere are no active chunks");
+                    sender.sendMessage(ChatColor.RED + "THere are no active chunks");
                 }
             }
-            sender.sendMessage(ChatColor.GREEN.toString() + "---------------------------");
-            sender.sendMessage(ChatColor.GOLD.toString() + "Next spawn wave between: " +
-                    ChatColor.WHITE.toString() + plugin.MinTime +
-                    ChatColor.GOLD.toString() + " Ticks and " +
-                    ChatColor.WHITE.toString() + plugin.MaxTime +
-                    ChatColor.GOLD.toString() + " Ticks");
-            sender.sendMessage(ChatColor.GOLD.toString() + "In-game Time: " +
-                    ChatColor.WHITE.toString() + timeService.getTime());
+
+            sender.sendMessage(ChatColor.GREEN + "---------------------------");
+            sender.sendMessage(ChatColor.GOLD + "Next spawn wave between: " +
+                    ChatColor.WHITE + plugin.MinTime +
+                    ChatColor.GOLD + " Ticks and " +
+                    ChatColor.WHITE + plugin.MaxTime +
+                    ChatColor.GOLD + " Ticks");
+            sender.sendMessage(ChatColor.GOLD + "In-game Time: " +
+                    ChatColor.WHITE + timeService.getTime());
         }
         return true;
     }
